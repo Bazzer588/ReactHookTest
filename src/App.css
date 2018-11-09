@@ -30,3 +30,20 @@
     transform: rotate(360deg);
   }
 }
+
+.form-field label {
+  display: block;
+  padding: 12px 0 8px 2px;
+}
+
+.form-field input {
+  height: 40px;
+  box-sizing: border-box;
+  font-size: 16px;
+  padding: 5px 2px 5px 10px;
+}
+
+code {
+  font-family: 'Consolas', 'monospace';
+  font-size: 12px;
+}
