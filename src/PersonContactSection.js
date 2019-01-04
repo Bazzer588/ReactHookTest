@@ -1,7 +1,8 @@
 import React from 'react';
+import FormField from './FormField';
 
 const MemberNo = { name: 'memberNo', component: 'input' };
-const Surname = { name: 'surname', component: 'input' };
+const Surname = { name: 'surname', component: 'input', required: true };
 const MemberDate = { name: 'memberDate', component: 'input', placeholder: 'Member start date' };
 
 function fieldChanged (field,fv,mod) {
@@ -52,6 +53,16 @@ function renderField (section, field, fieldChanged) {
             section.onChange({ target: { value: mod } });
     }
 
+    console.log('RF',name,value[name]);
+
+    return <FormField
+        {...field}
+        onChange={onChange}
+        path={section.path}
+        value={value[name] || ''}
+    />;
+
+    /*
     const Compo = field.component;
     return (
         <Compo
@@ -61,4 +72,5 @@ function renderField (section, field, fieldChanged) {
             value={value[name] || ''}
         />
     );
+    */
 }
