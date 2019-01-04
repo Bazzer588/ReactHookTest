@@ -30,7 +30,7 @@ function PersonContactSection (props) {
 }
 
 function areEqual (prev, next) {
-    return prev.value === next.value;
+    return prev.value === next.value; // + touched etc...
 }
 
 export default React.memo(PersonContactSection,areEqual);
