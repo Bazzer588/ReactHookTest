@@ -37,10 +37,10 @@ export default React.memo(PersonContactSection,areEqual);
 
 /** COMMON METHOD */
 
-function renderField (props, fieldProps, fieldChanged) {
+function renderField (section, field, fieldChanged) {
 
-    const { value } = props;
-    const { name } = fieldProps;
+    const { value } = section; // touched, showErrors, name, path, coreData
+    const { name } = field;
 
     function onChange (ev) {
         const v = ev.target.value;
@@ -48,16 +48,16 @@ function renderField (props, fieldProps, fieldChanged) {
         if (fieldChanged) {
             fieldChanged(name,v,mod);
         }
-        if (props.onChange)
-            props.onChange({ target: { value: mod } });
+        if (section.onChange)
+            section.onChange({ target: { value: mod } });
     }
 
-    const Compo = fieldProps.component;
+    const Compo = field.component;
     return (
         <Compo
-            {...fieldProps}
+            {...field}
             onChange={onChange}
-            path={props.path + '-' + name}
+            path={section.path + '-' + name}
             value={value[name] || ''}
         />
     );
