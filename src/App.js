@@ -3,13 +3,21 @@ import React, { useReducer } from 'react';
 import './App.css';
 import {HookTest} from './HookTest'
 import {InputTest} from './InputTest'
+import PersonSection from './PersonContactSection'
 import {reducer, reducerDefault} from './reducer'
 
 export const DispatchContext = React.createContext(null);
 
 export default function App () {
 
+    // console.log('APP RENDER');
+
     const [state, dispatch] = useReducer( reducer, reducerDefault );
+
+    const onChange = (ev) => {
+        console.log('FOO',ev.target.value);
+        dispatch({ type: 'SET', name: 'FooBar', value: ev.target.value });
+    };
 
     return (
         <DispatchContext.Provider value={dispatch}>
@@ -30,12 +38,18 @@ export default function App () {
             <code>
                 {JSON.stringify(state,null,' ')}
             </code>
+            <PersonSection path="FooBar" value={state.FooBar} onChange={onChange} />
 
             <HookTest name="T1"/>
             <HookTest name="T2"/>
+            <button onClick={walk} type="button">Walk tree</button>
         </div>
         </DispatchContext.Provider>
     );
+}
+
+function walk () {
+
 }
 
 const ResetButton = React.memo( ({ dispatch }) => {

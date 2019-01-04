@@ -10,7 +10,8 @@
     "react-dom": "^16.7.0-alpha.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set \"PORT=3333\" && set \"REACT_APP_DB_PASS=WOGGAJOK823543\" && react-scripts start",
+    "win": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
