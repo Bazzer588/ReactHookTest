@@ -31,6 +31,11 @@
   }
 }
 
+.form-field {
+  display: inline-block;
+  margin: 0 6px;
+}
+
 .form-field label {
   display: block;
   padding: 12px 0 8px 2px;

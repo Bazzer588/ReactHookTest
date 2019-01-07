@@ -1,3 +1,23 @@
+import React from 'react';
+
+export class TestForm extends React.Component {
+
+    onChangeField = (name,value) => {
+        this.setState({ [name]: value });
+    };
+
+    render () {
+        const state = this.state;
+        return (
+            <>
+                <PickField name="gender"      value={state.gender}      onChangeField={this.onChangeField} />
+                <TextField name="firstName"   value={state.firstName}   onChangeField={this.onChangeField} />
+                <TextField name="lastName"    value={state.lastName}    onChangeField={this.onChangeField} />
+                <DateField name="dateOfBirth" value={state.dateOfBirth} onChangeField={this.onChangeField} />
+            </>
+        );
+    }
+}
 
 export default t = {
     errors: {

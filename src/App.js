@@ -3,7 +3,10 @@ import React, { useReducer } from 'react';
 import './App.css';
 import {HookTest} from './HookTest'
 import {InputTest} from './InputTest'
-import PersonSection from './PersonContactSection'
+// import PersonSection from './PersonContactSection'
+import PersonSection from './HookTestForm'
+// import PersonSection from './HookTestReducer'
+// import PersonSection from './TestForm'
 import {reducer, reducerDefault} from './reducer'
 
 export const DispatchContext = React.createContext(null);
@@ -39,6 +42,7 @@ export default function App () {
                 {JSON.stringify(state,null,' ')}
             </code>
             <PersonSection path="FooBar" value={state.FooBar} onChange={onChange} />
+            <PersonSection path="Other" />
 
             <HookTest name="T1"/>
             <HookTest name="T2"/>

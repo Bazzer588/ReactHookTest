@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import FormField from './FormField';
 
 const MemberNo = { name: 'memberNo', component: 'input' };
@@ -12,12 +12,28 @@ function fieldChanged (field,fv,mod) {
     }
 }
 
+function doThing (name,v,value,onChange) {
+    console.log('DOTHING',name,v);
+    const mod = { ...value, [name]: v };    // value[name] = v;
+    //if (fieldChanged) {
+    //    fieldChanged(name,v,mod);
+    //}
+    if (onChange)
+        onChange({ target: { value: mod } });
+}
+
 function PersonContactSection (props) {
 
-    const { value } = props; // touched, showErrors, name, path, coreData
+    const { value, onChange, path } = props; // touched, showErrors, name, path, coreData
+
+    const memz = useCallback( (name,v) => {
+        doThing(name,v,value,onChange,path);
+    }, [value] );
+
+    //console.log('MEMZ',memz);
 
     function rf (fp) {
-        return <p>{renderField(props,fp,fieldChanged)}</p>;
+        return renderField(props,fp,fieldChanged,memz);
     }
 
     return <div>
@@ -38,12 +54,12 @@ export default React.memo(PersonContactSection,areEqual);
 
 /** COMMON METHOD */
 
-function renderField (section, field, fieldChanged) {
+function renderField (section, field, fieldChanged, memz) {
 
     const { value } = section; // touched, showErrors, name, path, coreData
     const { name } = field;
 
-    function onChange (ev) {
+    /*function onChange (ev) {
         const v = ev.target.value;
         const mod = { ...value, [name]: v };    // value[name] = v;
         if (fieldChanged) {
@@ -51,13 +67,12 @@ function renderField (section, field, fieldChanged) {
         }
         if (section.onChange)
             section.onChange({ target: { value: mod } });
-    }
-
-    console.log('RF',name,value[name]);
+    }*/
 
     return <FormField
         {...field}
-        onChange={onChange}
+        // onChange={onChange}
+        onChangeField={memz}
         path={section.path}
         value={value[name] || ''}
     />;
