@@ -57,7 +57,7 @@ export function changeit (state, arr, index = 0) {
     const item = arr[index];
     const name = item.name;
     if (item.value!==undefined) {
-        return { ...state, [name]: item.value };
+        return execHandler(item.handler, name, { ...state, [name]: item.value });
     }
     let mod = changeit( state[name] || {}, arr, index+1 );
     if (item.handler) {
