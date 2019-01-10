@@ -42,7 +42,7 @@ export function setHandler (key, fn) {
 }
 
 function execHandler (key, fieldName, newState) {
-    console.log('EXEC',key,fieldName,newState);
+    // console.log('EXEC',key,fieldName,newState);
     const fn = Handlers[key];
     if (fn) {
         return fn(newState, fieldName);

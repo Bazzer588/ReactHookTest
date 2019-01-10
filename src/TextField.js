@@ -1,13 +1,13 @@
 import React from 'react';
 
-export default React.memo( ({ name, value = '', touched, onChangeField, dispatch, dispatchFieldChange }) => {
+export default React.memo( ({ name, value = '', touched, onChangeField, dispatch, dispatchFieldChange, handler }) => {
 
-    console.log('RENDER TEXT FIELD',name,value);
+    // console.log('RENDER TEXT FIELD',name,value);
 
     function onChange (ev) {
         const value = ev.target.value;
         if (dispatchFieldChange) {
-            dispatchFieldChange(dispatch,[{ name, value, touched }]);
+            dispatchFieldChange(dispatch,[{ name, value, touched, handler }]);
         } else if (dispatch) {
             dispatch({ name, value: ev.target.value });
         } else {
@@ -27,7 +27,7 @@ export default React.memo( ({ name, value = '', touched, onChangeField, dispatch
                 type="text"
                 onBlur={onBlur}
                 onChange={onChange}
-                value={value || ''}
+                value={value}
             />
         </div>
     );
