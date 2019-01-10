@@ -1,10 +1,11 @@
-import React, { useReducer } from 'react';
+import React, {useCallback, useReducer} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import {HookTest} from './HookTest'
 import {InputTest} from './InputTest'
+import PersonSection from './PersonDispSection'
 // import PersonSection from './PersonContactSection'
-import PersonSection from './HookTestForm'
+// import PersonSection from './HookTestForm'
 // import PersonSection from './HookTestReducer'
 // import PersonSection from './TestForm'
 import {reducer, reducerDefault} from './reducer'
@@ -17,10 +18,14 @@ export default function App () {
 
     const [state, dispatch] = useReducer( reducer, reducerDefault );
 
-    const onChange = (ev) => {
+    /*const onChange = (ev) => {
         console.log('FOO',ev.target.value);
         dispatch({ type: 'SET', name: 'FooBar', value: ev.target.value });
-    };
+    };*/
+
+    const changeField = useCallback( (dispatch,list) => {
+        dispatch({ type: 'MAGIC', list });
+    }, [dispatch] );
 
     return (
         <DispatchContext.Provider value={dispatch}>
@@ -41,8 +46,8 @@ export default function App () {
             <code>
                 {JSON.stringify(state,null,' ')}
             </code>
-            <PersonSection path="FooBar" value={state.FooBar} onChange={onChange} />
-            <PersonSection path="Other" />
+            <PersonSection name="FooBar" value={state.value.FooBar} touched={state.touched.FooBar} dispatchFieldChange={changeField} dispatch={dispatch} />
+            <PersonSection name="Other"  value={state.value.Other}  touched={state.touched.Other}  dispatchFieldChange={changeField} dispatch={dispatch} />
 
             <HookTest name="T1"/>
             <HookTest name="T2"/>
