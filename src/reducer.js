@@ -29,3 +29,40 @@ export function reducer (state, action) {
             return state;
     }
 }
+
+const Handlers = {};
+
+export function setHandler (key, fn) {
+    Handlers[key] = fn;
+}
+
+function execHandler (key, fieldName, newState, newProps) {
+    console.log('EXEC',key,fieldName,newState);
+    const fn = Handlers[key];
+    if (fn) {
+        return fn(fieldName, newState, newProps);
+    }
+    return newState;
+}
+
+function lookup (state, arr, index = 0) {
+    const name = arr[index];
+    if (index>=arr.length-1) {
+        return state[name];
+    }
+    return lookup ( state[name] || {}, arr, index+1 );
+}
+
+export function changeit (state, arr, index = 0) {
+    const item = arr[index];
+    const name = item.name;
+    if (item.value!==undefined) {
+        return { ...state, [name]: item.value };
+    }
+    let mod = changeit( state[name] || {}, arr, index+1 );
+    if (item.handler) {
+        const field = arr[index+1].name;
+        mod = execHandler(item.handler,field,mod);
+    }
+    return { ...state, [name]: mod };
+}
