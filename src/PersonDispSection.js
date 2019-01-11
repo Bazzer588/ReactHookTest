@@ -16,7 +16,7 @@ setHandler('modPersonSection', (state,field) => {
         const {gender} = state.value;
         if (gender==='X') {
             const { value, touched } = state;
-            return { value: { ...value, firstName: 'Fred' }, touched: { ...touched, firstName: true } };
+            return { value: { ...value, firstName: 'Fred', lastName: 'Smith' }, touched: { ...touched, firstName: true } };
         }
         if (gender==='Z') {
             return { value: {gender}, touched: {} }

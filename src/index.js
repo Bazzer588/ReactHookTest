@@ -19,3 +19,13 @@ if (window.addEventListener) {
         console.log('mouseleave',ev.buttons);
     });
 }
+
+// hot loading
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        console.log('MOD HOT');
+        const NextApp = require('./App').default;
+        ReactDOM.render(<NextApp />, document.getElementById('root'));
+    });
+}

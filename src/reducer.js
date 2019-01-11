@@ -4,6 +4,21 @@ export const reducerDefault = { Food: 'Fish', FootballTeam: 'Arsenal', FooBar: {
     touched: {}
 };
 
+export let lastState = reducerDefault;
+
+const Actions = {
+    MAGIC: (state,action) => {
+        return changePath(state,action.list);
+    },
+    SET: (state, action) => {
+        return {
+            ...state,
+            [action.name]: action.value
+        };
+    },
+    RESTART: () => { return reducerDefault; }
+};
+
 export function reducer (state, action) {
 
     /*const pass = process.env.REACT_APP_DB_PASS;
@@ -20,6 +35,10 @@ export function reducer (state, action) {
         console.log(action,state);
     }*/
 
+    const fn = Actions[action.type];
+    if (fn)
+        return lastState = fn(state,action);
+    /*
     switch (action.type) {
         case 'MAGIC':
             return changePath(state,action.list);
@@ -33,6 +52,8 @@ export function reducer (state, action) {
         default:
             return state;
     }
+    */
+    return state;
 }
 
 const Handlers = {};
@@ -95,7 +116,7 @@ export function changePath (state, path, index = 0) {
     if (item.handler) {
         mod = execHandler(item.handler,field,mod);
     }
-    return { value: { ...value, [name]: mod.value }, touched: { ...touched, [name]: mod.touched } };
+    return { ...state, value: { ...value, [name]: mod.value }, touched: { ...touched, [name]: mod.touched } };
 }
 
 /** in state, value and touched are arrays */

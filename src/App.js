@@ -8,7 +8,7 @@ import PersonSection from './PersonDispSection'
 // import PersonSection from './HookTestForm'
 // import PersonSection from './HookTestReducer'
 // import PersonSection from './TestForm'
-import {reducer, reducerDefault} from './reducer'
+import {reducer, lastState} from './reducer'
 
 export const DispatchContext = React.createContext(null);
 
@@ -16,7 +16,7 @@ export default function App () {
 
     // console.log('APP RENDER');
 
-    const [state, dispatch] = useReducer( reducer, reducerDefault );
+    const [state, dispatch] = useReducer( reducer, lastState );
 
     /*const onChange = (ev) => {
         console.log('FOO',ev.target.value);
