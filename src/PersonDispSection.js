@@ -26,16 +26,17 @@ setHandler('modPersonSection', (state,field) => {
 });
 
 setHandler('modDateOfBirth', (state) => {
-    console.log('modDateOfBirth',state);
+    //console.log('modDateOfBirth',state);
     if (state.value.dateOfBirth==='now') {
         state.value.dateOfBirth = (new Date()).toISOString();
+        state.touched.dateOfBirth = true;
     }
     return state;
 });
 
 function PersonSection (props) {
 
-    const {name, value = {}, touched = {}, dispatchFieldChange, dispatch} = props; // touched, showErrors, name, path, coreData
+    const {name, value = {}, touched = {}, dispatchFieldChange, dispatch} = props; // showErrors, path, coreData
 
     const changeField = useCallback( (dispatch,arr) => {
         arr.splice(0,0,{ name, handler: 'modPersonSection' });

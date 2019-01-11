@@ -43,12 +43,12 @@ export default function App () {
                 {' '}
                 <button onClick={()=>dispatch({type:'RESTART'})} type="button">Start Over</button>
             </p>
-            <code>
-                {JSON.stringify(state,null,' ')}
-            </code>
             <PersonSection name="FooBar" value={state.value.FooBar} touched={state.touched.FooBar} dispatchFieldChange={changeField} dispatch={dispatch} />
             <PersonSection name="Other"  value={state.value.Other}  touched={state.touched.Other}  dispatchFieldChange={changeField} dispatch={dispatch} />
 
+            <code>
+                {JSON.stringify(state,null,' ')}
+            </code>
             <HookTest name="T1"/>
             <HookTest name="T2"/>
             <button onClick={walk} type="button">Walk tree</button>
