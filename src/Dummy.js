@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class TestForm extends React.Component {
+export class TestForm extends React.YAYAYA {
 
     onChangeField = (name,value) => {
         this.setState({ [name]: value });

@@ -51,14 +51,14 @@ export default function App () {
             </code>
             <HookTest name="T1"/>
             <HookTest name="T2"/>
-            <button onClick={walk} type="button">Walk tree</button>
+            <button onClick={() => walk(state)} type="button">Walk tree</button>
         </div>
         </DispatchContext.Provider>
     );
 }
 
-function walk () {
-
+function walk (state) {
+    console.log( JSON.stringify(state,null,' ') );
 }
 
 const ResetButton = React.memo( ({ dispatch }) => {

@@ -45,10 +45,10 @@ function PersonSection (props) {
 
     return (
         <div>
-        <TextField name="gender"      value={value.gender}      touched={touched.gender}      dispatchFieldChange={changeField} dispatch={dispatch} />
-        <TextField name="firstName"   value={value.firstName}   touched={touched.firstName}   dispatchFieldChange={changeField} dispatch={dispatch} />
-        <TextField name="lastName"    value={value.lastName}    touched={touched.lastName}    dispatchFieldChange={changeField} dispatch={dispatch} />
-        <TextField name="dateOfBirth" value={value.dateOfBirth} touched={touched.dateOfBirth} dispatchFieldChange={changeField} dispatch={dispatch} handler="modDateOfBirth"/>
+        <TextField name="gender"      path={name} value={value.gender}      touched={touched.gender}      dispatchFieldChange={changeField} dispatch={dispatch} />
+        <TextField name="firstName"   path={name} value={value.firstName}   touched={touched.firstName}   dispatchFieldChange={changeField} dispatch={dispatch} />
+        <TextField name="lastName"    path={name} value={value.lastName}    touched={touched.lastName}    dispatchFieldChange={changeField} dispatch={dispatch} />
+        <TextField name="dateOfBirth" path={name} value={value.dateOfBirth} touched={touched.dateOfBirth} dispatchFieldChange={changeField} dispatch={dispatch} handler="modDateOfBirth"/>
         </div>
     );
 
