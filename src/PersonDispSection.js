@@ -16,7 +16,7 @@ setHandler('modPersonSection', (state,field) => {
         const {gender} = state.value;
         if (gender==='X') {
             const { value, touched } = state;
-            return { value: { ...value, firstName: 'Fred', lastName: 'Smith' }, touched: { ...touched, firstName: true } };
+            return { value: { ...value, firstName: 'Fred', lastName: 'Smeeg' }, touched: { ...touched, firstName: true } };
         }
         if (gender==='Z') {
             return { value: {gender}, touched: {} }
@@ -43,15 +43,42 @@ function PersonSection (props) {
         dispatchFieldChange(dispatch,arr);
     }, [dispatch] );
 
+    function field (props) {
+        const fnm = props.name;
+        return <TextField path={name} value={value[fnm]} touched={touched[fnm]} dispatchFieldChange={changeField} dispatch={dispatch} {...props} />
+    }
+
+    function gp (props) {
+        const fnm = props.name;
+        return { path: name, value: value[fnm], touched: touched[fnm], dispatchFieldChange: changeField, dispatch, ...props };
+    }
+
+    /* // renders every time, loses focus
+    function MField ({ fnm, ...rest }) {
+        return (
+            <TextField
+                name={fnm} path={name} value={value[fnm]} touched={touched[fnm]}
+                dispatchFieldChange={changeField} dispatch={dispatch} {...rest}
+            />
+        );
+    }
+    */
+
     return (
         <div>
-        <TextField name="gender"      path={name} value={value.gender}      touched={touched.gender}      dispatchFieldChange={changeField} dispatch={dispatch} />
-        <TextField name="firstName"   path={name} value={value.firstName}   touched={touched.firstName}   dispatchFieldChange={changeField} dispatch={dispatch} />
-        <TextField name="lastName"    path={name} value={value.lastName}    touched={touched.lastName}    dispatchFieldChange={changeField} dispatch={dispatch} />
-        <TextField name="dateOfBirth" path={name} value={value.dateOfBirth} touched={touched.dateOfBirth} dispatchFieldChange={changeField} dispatch={dispatch} handler="modDateOfBirth"/>
+            {field(Gender)}
+            {field({ name: 'firstName' })}
+            {field({ name: 'lastName' })}
+            {field({ name: 'dateOfBirth', handler: 'modDateOfBirth' })}
+            <TextField {...gp(AgeOfPig)} max={10} min={0} />
+            <TextField {...gp(SizeOfCow)} />
         </div>
     );
 
 }
+
+const Gender = { name: 'gender' };
+const AgeOfPig = { name: 'ageOfPig', type: 'number' };
+const SizeOfCow = { name: 'sizeOfCow' };
 
 export default React.memo(PersonSection);
