@@ -16,7 +16,7 @@ setHandler('modPersonSection', (state,field) => {
         const {gender} = state.value;
         if (gender==='X') {
             const { value, touched } = state;
-            return { value: { ...value, firstName: 'Fred', lastName: 'Smeeg' }, touched: { ...touched, firstName: true } };
+            return { value: { ...value, firstName: 'Fred', lastNm: 'Smeeg' }, touched: { ...touched, firstName: true } };
         }
         if (gender==='Z') {
             return { value: {gender}, touched: {} }
@@ -68,7 +68,7 @@ function PersonSection (props) {
         <div>
             {field(Gender)}
             {field({ name: 'firstName' })}
-            {field({ name: 'lastName' })}
+            {field({ name: 'lastNm' })}
             {field({ name: 'dateOfBirth', handler: 'modDateOfBirth' })}
             <TextField {...gp(AgeOfPig)} max={10} min={0} />
             <TextField {...gp(SizeOfCow)} />
